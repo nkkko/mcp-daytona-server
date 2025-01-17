@@ -1,4 +1,3 @@
-# pyproject.toml
 [project]
 name = "mcp-daytona-server"
 version = "0.1.0"
@@ -9,7 +8,7 @@ authors = [{ name = "Nikola Balic", email = "niko@daytona.io" }]
 dependencies = [
     "mcp[cli]",
     "daytona-sdk",
-    "httpx", # for demonstration purposes, not required for daytona sdk usage
+    "httpx",
     "python-dotenv"
 ]
 
@@ -17,8 +16,11 @@ dependencies = [
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
+[tool.hatch.build]
+packages = ["src"]
+
 [tool.hatch.build.targets.wheel]
-packages = [] # Remove explicit packages.
+only-packages = true
 
 [tool.pyright]
 include = ["src"]
@@ -33,5 +35,5 @@ ignore = []
 line-length = 88
 target-version = "py310"
 
-[tool.uv.workspace]
-members = ["src"]
+[project.scripts]
+mcp-daytona = "src.main:main"
