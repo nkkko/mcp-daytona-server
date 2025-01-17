@@ -1,5 +1,5 @@
 [project]
-name = "mcp-daytona-server-src"
+name = "mcp_daytona_server_src"
 version = "0.1.0"
 description = "Source code for mcp-daytona-server"
 readme = "README.md"
