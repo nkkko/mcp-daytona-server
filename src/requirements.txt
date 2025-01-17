@@ -1,0 +1,7 @@
+# src/requirements.txt
+# Add all of the dependencies here for now until we separate concerns more
+daytona-sdk
+httpx
+pydantic-settings
+python-dotenv
+mcp[cli]
