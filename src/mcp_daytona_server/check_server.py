@@ -1,9 +1,11 @@
-# src/mcp_daytona_server/check_server.py
+# /Users/nikola/dev/mcp-daytona-server/src/mcp_daytona_server/check_server.py
 import asyncio
 import httpx
 from mcp_daytona_server.mcp_server import settings
 
 async def check_server():
+    print("\nChecking SDK configuration...")
+    # print(f"Config: {daytona_client.config}")
     print("\nChecking Daytona server version...")
     async with httpx.AsyncClient() as client:
         try:

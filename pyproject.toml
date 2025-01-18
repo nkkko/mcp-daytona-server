@@ -9,7 +9,7 @@ dependencies = [
     "mcp[cli]",
     "daytona-sdk",
     "httpx",
-    "python-dotenv"
+    "python-dotenv",
 ]
 
 [build-system]
