@@ -27,7 +27,7 @@ async def test_server():
 
     try:
         print("\nCreating Daytona environment...")
-        workspace_id = await mcp.call_tool(
+        result = await mcp.call_tool(
             "create_daytona_env",
             {
                 "language": "python",
@@ -36,10 +36,16 @@ async def test_server():
                 }
             }
         )
+
+        # Extract workspace_id from the result
+        workspace_id = result if isinstance(result, str) else result[0].text if isinstance(result, list) else None
+        if not workspace_id:
+            raise ValueError("Failed to get workspace ID from result")
+
         print(f"Created workspace: {workspace_id}")
 
         print("\nWaiting for workspace to be ready...")
-        await asyncio.sleep(5)
+        await asyncio.sleep(10)  # Give it some time to start up
 
         print("\nExecuting test code...")
         code_result = await mcp.call_tool(
@@ -49,10 +55,7 @@ async def test_server():
                 "workspace_id": workspace_id
             }
         )
-
-        # Extract the actual output from the result
-        output = code_result[0].text if isinstance(code_result, list) else code_result
-        print(f"Code output: {output}")
+        print(f"Code execution result: {code_result}")
 
     except Exception as e:
         print(f"Error occurred: {str(e)}")
@@ -67,9 +70,7 @@ async def test_server():
                     "remove_daytona_env",
                     {"workspace_id": workspace_id}
                 )
-                # Extract cleanup message
-                cleanup_msg = cleanup_result[0].text if isinstance(cleanup_result, list) else cleanup_result
-                print(f"Cleanup: {cleanup_msg}")
+                print(f"Cleanup result: {cleanup_result}")
             except Exception as e:
                 print(f"Error during cleanup: {str(e)}")
 
